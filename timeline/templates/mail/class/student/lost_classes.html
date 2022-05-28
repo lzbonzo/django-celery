@@ -1,0 +1,14 @@
+{% extends "mail_templated/base.tpl" %}
+{% load humanize %}
+
+{% block subject %}
+{{ c.customer.first_name | capfirst }}, you miss your lessons.
+{% endblock %}
+
+{% block body %}
+Dear {{ c.customer.first_name | capfirst }},
+
+Your subscription will expire soon and you will miss your lessons. If you don't want to lose your lessons, schedule the next ones as soon as possible.
+
+{% include 'mailer/_signature.html' %}
+{% endblock %}

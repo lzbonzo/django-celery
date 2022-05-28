@@ -370,7 +370,7 @@ class Class(ProductContainer):
     pre_start_notifications_sent_to_student = models.BooleanField(default=False)
 
     class Meta:
-        verbose_name = 'Purchsed lesson'
+        verbose_name = 'Purchased lesson'
         get_latest_by = 'buy_date'
 
     @property
@@ -562,3 +562,11 @@ class Class(ProductContainer):
             return False
 
         return entry.has_started()
+
+    def is_lost(self):
+        """
+        Is the class unused before the expiration time
+        """
+        day_after_class = self.timeline.start + timedelta(days=1)
+        class_expire_time = day_after_class.replace(hour=1, minute=0, second=0)
+        return not self.is_fully_used and timezone.now() > class_expire_time

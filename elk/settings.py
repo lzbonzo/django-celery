@@ -321,6 +321,10 @@ CELERYBEAT_SCHEDULE = {
         'task': 'accounting.tasks.bill_timeline_entries',
         'schedule': timedelta(minutes=1),
     },
+    'lost_classes_warning': {
+        'task':     'timeline.tasks.lost_classes_warning',
+        'schedule': timedelta(hours=1)
+    }
 }
 
 
